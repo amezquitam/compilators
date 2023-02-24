@@ -86,8 +86,6 @@ public:
 private:
     void AssertAlphabetRegistered(std::string_view alphabet_name)
     {
-        using namespace std::string_literals;
-
         bool IsRegistered = false;
         for (auto &m_alphabet : m_alphabets)
             if (m_alphabet.name == alphabet_name)

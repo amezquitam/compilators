@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(compilators)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 include(FetchContent)
 
@@ -18,8 +18,16 @@ FetchContent_MakeAvailable(googletest)
 
 
 add_executable(
+    languaje
+    src/languaje.cpp
+)
+
+
+add_executable(
     roman-numbers
-    src/roman-numbers.cpp)
+    src/roman-numbers.cpp
+    src/cli.cpp
+)
 
 target_include_directories(roman-numbers PUBLIC include)
 
@@ -41,7 +49,6 @@ add_executable(
 
 target_include_directories(roman-numbers-test PUBLIC include)
 target_link_libraries(roman-numbers-test PUBLIC GTest::gtest_main)
-
 
 
 include(GoogleTest)

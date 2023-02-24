@@ -1,38 +1,59 @@
+#include <cli.hpp>
+#include <fstream>
 
-#include <automaton.hpp>
-#include <iostream>
+const char *helpMessage = R"(     
+    Usage: 
+        automaton [Options]
+    Options:
+        -l                  Load an auto file
+        -s                  Select the section
+        -a                  Select the automaton
+        -e                  Specify the expresion to eval
+        -h                  Prints this message
+    Example
+        automaton -l test.auto -s my-section -a 'MyAutomaton' -e 'Expresion'
+)";
 
-int main(int argc, const char* args[])
+void help(int, char const **)
 {
-    Automaton NumericExpresion;
+    printf("%s", helpMessage);
+}
 
-    auto D = Alphabet("Digit", "0123456789");
-    auto P = Alphabet("Point", "."         );
-    auto E = Alphabet(  "Exp", "Ee"        );
-    auto S = Alphabet( "Sign", "+-"        );
+std::string getFileContent(const char* filename)
+{
+    std::string fileContent, buffer;
+    std::ifstream autofile(filename, std::ios::binary);
 
-    NumericExpresion.RegistAlphabets({D, P, E, S});
-    
-    NumericExpresion.MakeTable(
-                        { "Digit", "Point", "Exp", "Sign"},
-        {
-            { "Init" ,  { "Digit", "Point", "Err", "Sign"}, false },
-            { "Sign" ,  { "Digit", "Point", "Err", "Err" }, false },
-            { "Digit",  { "Digit", "DSDP" , "ED" , "Err" }, true  },
-            { "DSDP" ,  { "DSDP" , "Err"  , "ED" , "Err" }, true  },
-            { "ED"   ,  { "DED"  , "Err"  , "Err", "DES" }, false },
-            { "DED"  ,  { "DED"  , "Err"  , "Err", "Err" }, true  },
-            { "DES"  ,  { "DED"  , "Err"  , "Err", "Err" }, false },
-            { "Point",  { "DSDP" , "Err"  , "Err", "Err" }, false },
-            { "Err"  ,  { "Err"  , "Err"  , "Err", "Err" }, false },
-        }
-    );
-
-    if (argc > 1) 
+    while (!autofile.eof())
     {
-        bool IsValid = NumericExpresion.Validate(args[1]);
-        std::printf("La frase ingresada %s es una expresion numerica\n", (IsValid ? "" : "no"));
+        std::getline(autofile, buffer);
+        fileContent.append(buffer + "\n");
     }
+
+    return fileContent;
+}
+
+void loadFile(int argc, const char **argv)
+{
+    std::string fileContent = getFileContent(argv[0]);
+
+    for (auto c : fileContent)
+    {
+        if (c == ' ' || c == '\n') 
+        {
+            continue;
+        }
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    cli::ConsoleApplication app;
+
+    app.AddCommand("--help", help, 0);
+    app.AddCommand("-l", loadFile, 1);
+
+    app.Execute(argc, argv);
 
     return 0;
 }

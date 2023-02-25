@@ -19,3 +19,5 @@ define automaton 'NumericExpresion' (
     define state ('Point' ('DSDP'       'Err'       'Err'       'Err' )     0)
     define state ('Err'   ('Err'        'Err'       'Err'       'Err' )     0)
 )
+
+end section

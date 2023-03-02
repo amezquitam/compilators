@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 project(compilators)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 include(FetchContent)
 
@@ -15,12 +16,6 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 
-
-
-add_executable(
-    languaje
-    src/languaje.cpp
-)
 
 add_executable(
     roman-numbers-cli

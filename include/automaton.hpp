@@ -25,13 +25,13 @@ public:
         bool IsValid;
     };
 
-    void RegistAlphabets(std::vector<Alphabet>& alphabets)
+    void RegistAlphabets(std::vector<Alphabet> const& alphabets)
     {
         m_alphabets.reserve(alphabets.size());
         m_alphabets.insert(m_alphabets.end(), alphabets.begin(), alphabets.end());
     }
 
-    void MakeHeader(std::vector<Alphabet>& alphabets)
+    void MakeHeader(std::vector<Alphabet> const& alphabets)
     {
         RegistAlphabets(alphabets);
     }

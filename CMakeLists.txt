@@ -22,14 +22,15 @@ add_executable(
     src/languaje.cpp
 )
 
-
 add_executable(
-    roman-numbers
+    roman-numbers-cli
+    src/main.cpp
     src/roman-numbers.cpp
-    src/cli.cpp
 )
 
-target_include_directories(roman-numbers PUBLIC include)
+target_include_directories(
+    roman-numbers-cli PRIVATE include
+)
 
 
 enable_testing()
@@ -45,8 +46,13 @@ target_link_libraries(alphabet-test PUBLIC GTest::gtest_main)
 
 add_executable(
     roman-numbers-test
-    test/roman-numbers-test.cpp)
+    test/roman-numbers-test.cpp
+    src/roman-numbers.cpp
+    )
 
+target_compile_definitions(roman-numbers-test PRIVATE 
+    RESOURCES_PATH="${CMAKE_CURRENT_SOURCE_DIR}/resources/"
+)
 target_include_directories(roman-numbers-test PUBLIC include)
 target_link_libraries(roman-numbers-test PUBLIC GTest::gtest_main)
 

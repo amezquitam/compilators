@@ -25,10 +25,15 @@ public:
         bool IsValid;
     };
 
-    void RegistAlphabets(std::initializer_list<Alphabet> alphabets)
+    void RegistAlphabets(std::vector<Alphabet>& alphabets)
     {
         m_alphabets.reserve(alphabets.size());
-        m_alphabets.insert(m_alphabets.cend(), alphabets);
+        m_alphabets.insert(m_alphabets.end(), alphabets.begin(), alphabets.end());
+    }
+
+    void MakeHeader(std::vector<Alphabet>& alphabets)
+    {
+        RegistAlphabets(alphabets);
     }
 
     void MakeTable(std::initializer_list<std::string_view> alphabets,

@@ -1,6 +1,4 @@
 
-begin section numeric-expresion
-
 define alphabet 'Digit' as '0123456789'
 define alphabet 'Exp'   as 'Ee'
 define alphabet 'Sign'  as '+-'
@@ -19,5 +17,3 @@ define automaton 'NumericExpresion' (
     define state ('Point' ('DSDP'       'Err'       'Err'       'Err' )     0)
     define state ('Err'   ('Err'        'Err'       'Err'       'Err' )     0)
 )
-
-end section

@@ -79,7 +79,9 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "codecvt": "cpp",
+        "valarray": "cpp"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }

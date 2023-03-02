@@ -137,30 +137,14 @@ private:
     std::vector<Token> tokens;
 };
 
-int main()
+
+#include <fstream>
+
+
+int main(int argc, const char** argv)
 {
-    std::string test = "begin section numeric\n";
+    if (argc < 2) return 0;
 
-    LanguageNode root("");
 
-    auto &insection = root.expect(Keyword::begin).expect(Keyword::section).expect(Identifier::id).expect(Separator::endl);
-
-    auto &define = insection.expect(Keyword::define);
-    auto &end = insection.expect(Keyword::end);
-
-    define.expect(Keyword::alphabet).expect(Literal::string).expect(Keyword::as).expect(Literal::string).expect(Literal::identifier).expect(Separator::endl);
-    define.expect(Keyword::automaton);
-
-    LanguageNode *current = &root;
-
-    for (auto token : tokenize(test))
-    {
-        std::printf("Current: %s\n", token.c_str());
-        current = current->getChild(token);
-        if (!current)
-        {
-            std::printf("Sintax error\n");
-            break;
-        }
-    }
+    return 0;
 }

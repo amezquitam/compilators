@@ -1,6 +1,5 @@
 
 #include <automaton.hpp>
-#include <iostream>
 
 Automaton RomanNumberAutomaton;
 

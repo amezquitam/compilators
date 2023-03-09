@@ -1,9 +1,13 @@
 #include <automaton.hpp>
+#include <numeric-expresion.hpp>
 
-int main(int argc, char const *argv[])
-{
-  Automaton NumericExpresion;
-  
+Automaton NumericExpresion;
+
+void initNumericExpresion() {
+  static bool initialized = false; 
+
+  if (initialized) return;
+
   NumericExpresion.RegistAlphabets({
     Alphabet( "numbers", "0123456789" ),
     Alphabet(   "signs", "+-"         ),
@@ -14,23 +18,24 @@ int main(int argc, char const *argv[])
   NumericExpresion.MakeTable (
                   { "numbers", "point", "exponent", "signs"},
     {
-      { "Init" ,  {   "Digit", "Point",      "Err",  "Sign"}, false },
-      { "Sign" ,  {   "Digit", "Point",      "Err",  "Err" }, false },
-      { "Digit",  {   "Digit",  "DSDP",       "ED",  "Err" }, true  },
-      { "DSDP" ,  {    "DSDP",   "Err",       "ED",  "Err" }, true  },
-      { "ED"   ,  {     "DED",   "Err",      "Err",  "DES" }, false },
-      { "DED"  ,  {     "DED",   "Err",      "Err",  "Err" }, true  },
-      { "DES"  ,  {     "DED",   "Err",      "Err",  "Err" }, false },
-      { "Point",  {    "DSDP",   "Err",      "Err",  "Err" }, false },
-      { "Err"  ,  {     "Err",   "Err",      "Err",  "Err" }, false },
+      { "Init" ,  {   "Digit", "Point",      "Err",  "Sign"}, false }, // estado inicial
+      { "Sign" ,  {   "Digit", "Point",      "Err",  "Err" }, false }, // primer signo
+      { "Digit",  {   "Digit",  "DSDP",       "ED",  "Err" }, true  }, // digitos antes del exponente y punto
+      { "DSDP" ,  {    "DSDP",   "Err",       "ED",  "Err" }, true  }, // digitos despues del punto
+      { "ED"   ,  {     "DED",   "Err",      "Err",  "DES" }, false }, // exponente
+      { "DED"  ,  {     "DED",   "Err",      "Err",  "Err" }, true  }, // digitos del exponente
+      { "DES"  ,  {     "DED",   "Err",      "Err",  "Err" }, false }, // digitos despues del signo del exponente
+      { "Point",  {    "DSDP",   "Err",      "Err",  "Err" }, false }, // punto
+      { "Err"  ,  {     "Err",   "Err",      "Err",  "Err" }, false }, // error irreparable
     }
   );
 
-  if (argc > 1) 
-  {
-    bool IsValid = NumericExpresion.Validate(argv[1]);
-    std::printf("La expresion '%s'%s es una expresion numerica\n", argv[1], (IsValid ? "" : " no"));
-  }
-
-  return 0;
+  initialized = true;
 }
+
+bool isNumericExpression(const char* str)
+{
+  initNumericExpresion();
+  return NumericExpresion.Validate(str);
+}
+

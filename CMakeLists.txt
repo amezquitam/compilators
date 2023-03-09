@@ -18,7 +18,7 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(
     roman-numbers-cli
-    src/main.cpp
+    src/roman-numbers-cli.cpp
     src/roman-numbers.cpp
 )
 
@@ -28,6 +28,7 @@ target_include_directories(
 
 add_executable(
     numeric-expresions-cli
+    src/numeric-expresions-cli.cpp
     src/numeric-expresions.cpp
 )
 
@@ -43,7 +44,8 @@ add_executable(
     roman-numbers-test
     test/roman-numbers-test.cpp
     src/roman-numbers.cpp
-    )
+)
+
 
 target_compile_definitions(roman-numbers-test PRIVATE 
     RESOURCES_PATH="${CMAKE_CURRENT_SOURCE_DIR}/resources/"
@@ -51,6 +53,14 @@ target_compile_definitions(roman-numbers-test PRIVATE
 target_include_directories(roman-numbers-test PUBLIC include)
 target_link_libraries(roman-numbers-test PUBLIC GTest::gtest_main)
 
+add_executable(
+    numeric-expresions-test
+    test/numeric-expresions-test.cpp
+    src/numeric-expresions.cpp
+)
+    
+target_include_directories(numeric-expresions-test PUBLIC include)
+target_link_libraries(numeric-expresions-test PUBLIC GTest::gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(roman-numbers-test)

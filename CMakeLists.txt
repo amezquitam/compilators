@@ -16,7 +16,6 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 
-
 add_executable(
     roman-numbers-cli
     src/main.cpp
@@ -27,16 +26,17 @@ target_include_directories(
     roman-numbers-cli PRIVATE include
 )
 
-
-enable_testing()
-
-
 add_executable(
-    alphabet-test
-    test/alphabet-test.cpp)
+    numeric-expresions-cli
+    src/numeric-expresions.cpp
+)
 
-target_include_directories(alphabet-test PUBLIC include)
-target_link_libraries(alphabet-test PUBLIC GTest::gtest_main)
+target_include_directories(
+    numeric-expresions-cli PRIVATE include
+)
+
+## tests
+enable_testing()
 
 
 add_executable(
@@ -53,5 +53,4 @@ target_link_libraries(roman-numbers-test PUBLIC GTest::gtest_main)
 
 
 include(GoogleTest)
-gtest_discover_tests(alphabet-test)
 gtest_discover_tests(roman-numbers-test)

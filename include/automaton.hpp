@@ -22,7 +22,7 @@ public:
 
     void RegistAlphabets(std::vector<Alphabet> const &alphabets);
 
-    void MakeTable(std::vector<std::string_view> alphabets, std::vector<State> states);
+    void MakeTable(std::vector<std::string_view> const alphabets, std::vector<State> const states);
 
     bool Validate(std::string_view TestCh);
 

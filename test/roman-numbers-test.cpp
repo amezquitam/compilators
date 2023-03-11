@@ -5,7 +5,7 @@
 
 TEST(RomanNumbers, Test)
 {
-  std::ifstream file(std::string(RESOURCES_PATH) + "test_file");
+  std::ifstream file("test_file");
 
   std::string line;
 

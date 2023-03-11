@@ -12,7 +12,7 @@ void Automat::RegistAlphabets(std::vector<Alphabet> const &alphabets)
   m_alphabets.insert(m_alphabets.end(), alphabets.begin(), alphabets.end());
 }
 
-void Automat::MakeTable(std::vector<std::string_view> alphabets, std::vector<State> states)
+void Automat::MakeTable(std::vector<std::string_view> const alphabets, std::vector<State> const states)
 {
   for (auto &state : states)
   {
@@ -28,7 +28,7 @@ void Automat::MakeTable(std::vector<std::string_view> alphabets, std::vector<Sta
   {
     for (int i = 0; i < alphabets.size(); ++i)
     {
-      m_table[state.name][alphabets.begin()[i]] = state.states.begin()[i];
+      m_table[state.name][alphabets[i]] = state.states[i];
     }
 
     // Fill valid table
@@ -43,7 +43,7 @@ void Automat::MakeTable(std::vector<std::string_view> alphabets, std::vector<Sta
     }
   }
 
-  m_InitialState = states.begin()[0].name;
+  m_InitialState = states[0].name;
 }
 
 bool Automat::Validate(std::string_view TestCh)

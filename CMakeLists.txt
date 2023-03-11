@@ -81,3 +81,5 @@ target_link_libraries(alphabet-test PUBLIC GTest::gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(roman-numbers-test)
+gtest_discover_tests(numeric-expresions-test)
+gtest_discover_tests(alphabet-test)

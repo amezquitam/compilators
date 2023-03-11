@@ -11,6 +11,7 @@ TEST(AlphabetTest, IsOnAlgorithm)
     ASSERT_TRUE(V.has('a'));
     ASSERT_TRUE(L.has('m'));
     ASSERT_TRUE(L.has('z'));
+    ASSERT_TRUE(L.has('a'));
     ASSERT_TRUE(L.has('b'));
     ASSERT_FALSE(C.has('a'));
 }

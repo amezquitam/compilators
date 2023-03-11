@@ -1,7 +1,7 @@
 
 #include <automaton.hpp>
 
-Automaton RomanNumberAutomaton;
+Automat RomanNumberAutomaton;
 
 bool has_been_initialized = false;
 

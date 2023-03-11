@@ -1,7 +1,7 @@
 #include <automaton.hpp>
 #include <numeric-expresion.hpp>
 
-Automaton NumericExpresion;
+Automat NumericExpresion;
 
 void initNumericExpresion() {
   static bool initialized = false; 

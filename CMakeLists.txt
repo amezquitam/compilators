@@ -20,6 +20,8 @@ add_executable(
     roman-numbers-cli
     src/roman-numbers-cli.cpp
     src/roman-numbers.cpp
+    src/automaton.cpp
+    src/alphabet.cpp
 )
 
 target_include_directories(
@@ -30,6 +32,8 @@ add_executable(
     numeric-expresions-cli
     src/numeric-expresions-cli.cpp
     src/numeric-expresions.cpp
+    src/automaton.cpp
+    src/alphabet.cpp
 )
 
 target_include_directories(
@@ -44,6 +48,8 @@ add_executable(
     roman-numbers-test
     test/roman-numbers-test.cpp
     src/roman-numbers.cpp
+    src/automaton.cpp
+    src/alphabet.cpp
 )
 
 
@@ -57,10 +63,21 @@ add_executable(
     numeric-expresions-test
     test/numeric-expresions-test.cpp
     src/numeric-expresions.cpp
+    src/automaton.cpp
+    src/alphabet.cpp
+)
+
+add_executable(
+    alphabet-test
+    test/alphabet-test.cpp
+    src/alphabet.cpp
 )
     
 target_include_directories(numeric-expresions-test PUBLIC include)
 target_link_libraries(numeric-expresions-test PUBLIC GTest::gtest_main)
+
+target_include_directories(alphabet-test PUBLIC include)
+target_link_libraries(alphabet-test PUBLIC GTest::gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(roman-numbers-test)

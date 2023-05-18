@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(compilators)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 include(FetchContent)
@@ -24,8 +24,20 @@ add_executable(
     src/alphabet.cpp
 )
 
+add_executable(
+    eval-arith-cli
+    src/arithmetic.cpp
+    src/numeric-expresions.cpp
+    src/automaton.cpp
+    src/alphabet.cpp
+)
+
 target_include_directories(
     roman-numbers-cli PRIVATE include
+)
+
+target_include_directories(
+    eval-arith-cli PRIVATE include
 )
 
 add_executable(

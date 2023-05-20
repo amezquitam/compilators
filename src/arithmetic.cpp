@@ -309,7 +309,8 @@ double eval(const string& code) {
 
 int main(int argc, char const* argv[]) {
 
-  std::cout << std::setprecision(14) << eval(argv[1]) << '\n';
+  if (argc == 2)
+    std::cout << std::setprecision(14) << eval(argv[1]) << '\n';
 
   return 0;
 }
